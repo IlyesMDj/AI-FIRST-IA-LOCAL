@@ -1,7 +1,7 @@
 # --- Données personnelles : JAMAIS dans le dépôt (dépôt PUBLIC) --------------
 # Chemins ancrés à la racine : un dossier docs/data/ resterait versionné.
+# Le kit du soir (kit/, CV générés donc fictifs) est versionné à la demande de l'équipe.
 /data/
-/kit/
 exports/
 *.db
 *.db-journal
@@ -14,6 +14,8 @@ exports/
 *.png
 *.jpg
 *.jpeg
+!/kit/**/*.pdf
+!/kit/**/*.jpg
 
 # --- Secrets -----------------------------------------------------------------
 .env

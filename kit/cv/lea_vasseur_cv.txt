@@ -1,0 +1,39 @@
+LÉA VASSEUR
+Développeuse junior passionnée, à la recherche d'un premier CDI
+lea.vasseur@mail.example - 06 39 98 10 19 - Nantes
+Célibataire, sans enfant, mobilité totale
+
+MES ATOUTS
+Dynamique, motivée, autonome, je suis une vraie passionnée d'informatique depuis le collège. J'apprends très vite et je m'investis à 100 % dans tout ce que je fais.
+
+FORMATION
+2023-2026 : Bachelor développement, La Fabrique du Code (dernière année en alternance)
+2023 : Baccalauréat général, spécialités maths et NSI, mention assez bien
+
+EXPÉRIENCES
+Sept. 2025 - août 2026 : Développeuse en alternance, Mouette Logiciels (Nantes)
+Correction d'anomalies sur une application Django, écriture de tests, participation aux réunions d'équipe, rédaction de documentation.
+
+Mai - juillet 2025 : Stage de développement, Studio Galet (Nantes)
+Réalisation d'un site vitrine et d'un petit back-office Django.
+
+Étés 2023 et 2024 : Serveuse, Le Bistrot du Port (La Baule)
+Gestion de la relation client, travail sous pression.
+
+2022 : Baby-sitting
+
+PROJETS D'ÉCOLE
+- Clone d'un réseau social en Django (projet de groupe, 4 personnes)
+- Application de gestion de bibliothèque en Python et SQLite
+- Jeu du pendu en Python
+- Site de recettes en HTML, CSS et JavaScript
+- Chatbot avec une API d'IA
+
+COMPÉTENCES
+Python (très bon niveau), Django, Flask, FastAPI, SQL, PostgreSQL, MongoDB, HTML, CSS, JavaScript, React, Java, C, Docker, Kubernetes, AWS, Git, Linux, intelligence artificielle, Pack Office
+
+LANGUES
+Anglais : B1. Espagnol : A2.
+
+LOISIRS
+Jeux vidéo, danse, bénévolat dans une association, voyages

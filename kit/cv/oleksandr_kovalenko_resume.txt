@@ -1,0 +1,68 @@
+Contact
+o.kovalenko@mail.example
+06 39 98 10 11
+linkedin.example/in/okovalenko (LinkedIn)
+github.example/okovalenko (Portfolio)
+
+Top Skills
+Python
+FastAPI
+PostgreSQL
+
+Languages
+English (Full Professional)
+French (Limited Working)
+Ukrainian (Native)
+
+Certifications
+AWS Certified Cloud Practitioner
+
+Oleksandr Kovalenko
+Senior Python Developer | FastAPI, Django, PostgreSQL
+Nantes, Pays de la Loire, France
+
+Summary
+Backend developer with 7 years of Python experience in logistics and fintech. Ukrainian national, under temporary protection status in France since 2022, authorized to work. Learning French every week.
+
+Experience
+
+Quaytrack
+Python Developer
+February 2023 - Present (3 years 10 months)
+Nantes, Pays de la Loire, France
+FastAPI services for port logistics: container tracking, customs status, event notifications.
+Designed PostgreSQL schemas and tuned slow queries on tables above 500M rows.
+Built CI pipelines and Docker images, cut build time from 18 to 6 minutes.
+Mentored one junior developer.
+
+Page 1 of 2
+
+Self-employed
+Freelance Python Developer
+August 2022 - January 2023 (6 months)
+Remote
+Short missions while settling in France. Data migration scripts, a small Django admin.
+
+Dniprosoft
+Backend Developer
+September 2019 - March 2022 (2 years 7 months)
+Dnipro, Ukraine
+Django payment back office for a regional bank.
+Reconciliation jobs with Celery.
+Unit and integration tests with pytest.
+
+Dniprosoft
+Junior Developer
+June 2018 - August 2019 (1 year 3 months)
+Dnipro, Ukraine
+Internal tools, Python scripts, bug fixes.
+
+Education
+
+Dnipro Institute of Technology
+Master of Science - MS, Computer Science (2017 - 2019)
+
+Dnipro Institute of Technology
+Bachelor of Science - BS, Computer Science (2013 - 2017)
+
+Page 2 of 2

@@ -1,0 +1,24 @@
+Sophie Lefèvre
+sophie.lefevre@mail.example
+06 39 98 10 06
+Nantes
+
+Mon parcours en quelques lignes
+
+Comptable pendant dix ans, j'ai passé beaucoup de temps à contourner des logiciels de gestion mal pensés. En 2024, j'ai décidé de passer de l'autre côté. Depuis un peu plus d'un an, je développe en Python sur un logiciel de comptabilité. Je ne suis pas encore une développeuse confirmée, mais je sais ce qu'un utilisateur attend, et je sais lire un bilan.
+
+Ce que j'ai fait, dans l'ordre
+
+2013. DCG (diplôme de comptabilité et de gestion), Lycée de Brécy.
+
+2014-2024. Comptable, puis comptable référente, Cabinet Morvan & Associés, Nantes. Tenue et révision des comptes d'une quarantaine de PME, déclarations fiscales, clôtures. À partir de 2020, j'ai écrit mes premières macros Excel puis mes premiers scripts Python pour rapprocher les relevés bancaires. Ils sont encore utilisés au cabinet.
+
+Janvier à juin 2025. Formation développeur Python à temps plein, La Fabrique du Code (Nantes), 800 heures. Projet de fin de formation : une application Django de notes de frais, avec import de justificatifs.
+
+Depuis juillet 2025. Développeuse Python, Compta Claire, Nantes (éditeur, 25 personnes). Évolutions de l'application Django, écriture de tests, correction d'anomalies, assistance aux clients sur les cas complexes. J'ai repris seule le module de rapprochement bancaire.
+
+Outils : Python, Django, SQL (PostgreSQL), Git, pytest, un peu de Docker. Excel, évidemment.
+
+Anglais : je lis la documentation, je parle peu.
+
+Mes engagements : conseillère municipale d'opposition à Brécy-sur-Erdre depuis 2020, membre de la commission des finances.

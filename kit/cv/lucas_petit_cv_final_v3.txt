@@ -1,0 +1,20 @@
+Lucas Petit
+dev python
+lucas.petit@mail.example / 06 39 98 10 09
+
+Nordika
+développeur
+API Django
+tests
+base PostgreSQL
+mise en prod
+
+Studio Lanterne
+sites et back-offices en Python
+clients divers
+
+avant : divers postes
+
+stack : python, django, postgres, git, docker, un peu de vue
+
+portfolio sur demande

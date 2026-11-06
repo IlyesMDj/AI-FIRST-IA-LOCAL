@@ -1,0 +1,27 @@
+PIERRE LAMBERT - DEVOPS / SRE / CLOUD ENGINEER
+pierre.lambert@mail.example  //  06 39 98 10 18  //  Le Mans
+
+MOTS-CLÉS
+Kubernetes, K8s, Helm, ArgoCD, GitOps, Terraform, Ansible, Packer, Vault, Consul, AWS, GCP, Azure, Linux, Debian, RHEL, Docker, Podman, GitLab CI, GitHub Actions, Jenkins, Prometheus, Grafana, Loki, ELK, Python, Bash, Go, SQL, PostgreSQL, MySQL, Nginx, HAProxy, Agile, Scrum, DevSecOps, FinOps, IaC, CI/CD, SRE, observabilité, haute disponibilité
+
+PARCOURS
+
+2022 -> maintenant : Ingénieur DevOps senior, Sarthe Hébergement (Le Mans)
+Gestion de 12 clusters K8s, migration on-prem vers cloud hybride, IaC Terraform, baisse de 30 % de la facture cloud. Écriture d'outils internes en Python : opérateur de sauvegarde, CLI de déploiement, scripts d'audit.
+
+2019 -> 2022 : Ingénieur systèmes puis DevOps, Sarthe Hébergement
+Administration Linux, automatisation Ansible, mise en place de la supervision.
+
+2017 -> 2019 : Technicien support, Le Mans Informatique Services
+Support niveau 2, parc de 800 postes.
+
+DIPLÔMES
+Licence pro administration systèmes, IUT de Brécy (2019, alternance)
+BTS SIO (2017)
+CKA, Terraform Associate, AWS Solutions Architect Associate
+
+ANGLAIS
+B2
+
+À CÔTÉ
+Organiste et bénévole à la paroisse de Brécy, trail

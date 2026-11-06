@@ -5,8 +5,9 @@ Un assistant RH qui aide une recruteuse à lire, comprendre et comparer des cand
 Projet du hackathon AI First × 42 Paris, édition 11 ([brief](https://ai-first-42-recruiter-copilot.trybailey.app/)).
 
 ## ⚠️ Dépôt public : aucune donnée candidat
-- Le kit du soir va dans `kit/` et la base dans `data/`. Les deux sont ignorés par git : ne forcez jamais leur ajout avec `git add -f`.
-- Avant chaque push, `git status` ne doit lister aucun CV ni aucune base.
+- Le kit du soir est versionné dans `kit/` : ses 20 CV sont générés, donc fictifs. Ne commitez jamais de CV réel.
+- La base `data/` est ignorée par git : ne forcez jamais son ajout avec `git add -f`.
+- Avant chaque push, `git status` ne doit lister aucune base ni aucun CV hors de `kit/`.
 - Ne faites jamais lire `kit/cv/` ni `data/` à un agent IA distant (Claude Code, Cursor, Copilot…). Pour Claude Code, c'est bloqué par `.claude/settings.json`.
 
 ## En deux minutes
@@ -34,9 +35,10 @@ Prérequis : Python 3.12+, Node 20+, Ollama.
    - macOS : `launchctl setenv OLLAMA_NO_CLOUD 1`
 
    Téléchargez ensuite le modèle : `ollama pull ministral-3:3b` (en option : `ministral-3:8b`). Astuce : copiez le dossier `.ollama/models` d'un PC à l'autre avec une clé USB plutôt que de retélécharger 3 Go sur le Wi-Fi.
-2. **Kit du soir.** Dézippez `2026-11-06-recruiter-copilot-kit.zip` à la racine du dépôt, pour obtenir `kit/fiche-de-poste.md` et `kit/cv/`.
-   - La fiche de poste est chargée au démarrage.
-   - Les CV s'importent par glisser-déposer dans l'interface.
+2. **Kit du soir.** Il est déjà dans le dépôt :
+   - `kit/fiche-de-poste.md` est chargée au démarrage ;
+   - `kit/registre-simplifie.md` est le modèle de registre des organisateurs ;
+   - les CV de `kit/cv/` s'importent par glisser-déposer dans l'interface.
 3. **Installation et lancement :**
    ```powershell
    python -m venv .venv; .\.venv\Scripts\pip install -r requirements.txt

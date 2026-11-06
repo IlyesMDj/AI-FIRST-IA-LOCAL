@@ -1,0 +1,38 @@
+HUGO   FONTAINE
+
+
+Développeur  Python
+hugo.fontaine@mail.example		06 39 98 10 14
+Nantes
+
+EXPERIENCE
+
+Énergies de l'Estuaire			Saint-Herblain
+Développeur Python				depuis septembre
+2021
+
+	·	API Django de relevés de compteurs (1,2 million de
+compteurs suivis)
+	·	Traitements PostgreSQL volumineux, partitionnement
+	·	Tests et intégration
+continue (GitLab)
+	·	Astreinte hivernale
+
+Énergies de l'Estuaire			Saint-Herblain
+Alternant développeur				2019-2021
+	·	Scripts Python de contrôle des données de facturation
+
+
+AUTRES ACTIVITÉS
+	·	Délégué syndical dans mon entreprise depuis 2023, élu au CSE
+	·	Bénévole pour un festival de musique
+
+
+FORMATION
+BUT informatique, IUT de Brécy			2021
+
+
+COMPETENCES
+Python		Django		PostgreSQL
+pytest		GitLab CI	Linux
+Anglais B1

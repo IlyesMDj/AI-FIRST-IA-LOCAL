@@ -1,0 +1,51 @@
+AICHA TRAORE
+==================================================
+Developpeuse Django - 6 ans de pratique
+aicha.traore@mail.example | 06 39 98 10 13 | Angers
+
+
+EXPERIENCES
+--------------------------------------------------
+
+Sept. 2024 - aujourd'hui      MAINE LOGICIELS, Angers
+                              Développeuse Django
+
+    Application de gestion de chantiers pour le BTP.
+    Module de planning, API REST pour l'application mobile,
+    tests pytest. Refonte des droits d'accès par rôle.
+
+Sept. 2022 - août 2024        Interruption pour congé parental (deux enfants)
+                              Formation en ligne sur FastAPI pendant cette période
+
+Oct. 2018 - août 2022         LOIRE SOLUTIONS, Angers
+                              Développeuse Django
+
+    Portail client d'un groupe de maintenance : tickets,
+    contrats, factures. PostgreSQL, Celery, envois de mails
+    en masse. Mise en production avec Docker. Référente de
+    l'équipe sur les migrations de base de données.
+
+Avril - sept. 2018            LOIRE SOLUTIONS, Angers
+                              Stage de fin d'études
+
+
+FORMATION
+--------------------------------------------------
+
+2018    Master informatique, Université de Saint-Alban
+2016    Licence informatique, Université de Saint-Alban
+
+
+COMPETENCES
+--------------------------------------------------
+
+Python, Django, DRF, Celery      ++++
+PostgreSQL                       +++
+Docker, Git, pytest              +++
+FastAPI                          ++
+
+
+LANGUES
+--------------------------------------------------
+
+Anglais B2, Bambara

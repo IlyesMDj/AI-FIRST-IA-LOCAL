@@ -1,0 +1,45 @@
+# Thomas Martin
+Dev Python backend / Rennes (hybride ok, Nantes 2-3 j/sem. possible)
+
+- thomas.martin.dev@mail.example
+- 06 39 98 10 02
+- linkedin.example/in/thomas-martin-dev
+- github.example/tmartin-dev
+
+## En bref
+6 ans de backend. API, traitements asynchrones, un peu d'exploitation.
+Je préfère les petites équipes où le dev suit son code jusqu'en prod.
+
+## Stack
+Python 3 (asyncio), FastAPI, Flask, SQLAlchemy, Alembic, Celery
+PostgreSQL (TimescaleDB sur le dernier projet), Redis, RabbitMQ
+pytest, hypothesis, Docker, GitHub Actions, Terraform (lecture), AWS (ECS, S3)
+
+## Expériences
+
+### Kelio Marine - dev Python (03/2022 -> aujourd'hui)
+Suivi de flottes de bateaux de travail, 30 personnes dont 7 devs.
+* API FastAPI d'ingestion de positions, env. 200 req/s en pic
+* découpage du monolithe Flask en 3 services (+ file RabbitMQ)
+* schéma Postgres/Timescale, migrations Alembic sans coupure
+* tests d'intégration avec conteneurs jetables, temps de CI divisé par 2
+* astreintes une semaine sur six
+
+### Atelier Sémaphore - dev Python (09/2020 -> 02/2022)
+Agence, 12 personnes. Petites applis pour des clients locaux.
+* appli de facturation interne en Flask
+* API pour une coopérative agricole
+* premiers déploiements Docker + GitHub Actions
+
+### Sémaphore encore - alternance (2018-2020)
+Maintenance de sites et scripts Python d'import de données.
+
+## Projets perso
+- petit-relevé : lib Python pour lire des fichiers de capteurs NMEA (120 étoiles)
+- contributions à une lib de migrations, 2 PR acceptées
+
+## Formation
+Ingénieur info, École supérieure d'informatique de Kermor, 2020 (en alternance)
+
+## Anglais
+B2, docs et échanges écrits sans souci

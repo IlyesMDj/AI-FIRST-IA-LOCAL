@@ -1,0 +1,94 @@
+MAMADOU DIALLO
+Lead developer / Architecte logiciel / Engineering manager
+Lyon - mobilité France entière, télétravail apprécié
+m.diallo@mail.example - 06 39 98 10 05
+linkedin.example/in/mamadou-diallo-lead - github.example/mdiallo
+
+SYNTHÈSE
+Dix ans de développement logiciel, dont quatre à encadrer une équipe. J'ai connu la startup, l'éditeur et le monde associatif. Après plusieurs années de plus en plus loin du code, je cherche aujourd'hui un poste plus technique, dans une structure où les décisions se prennent près du produit.
+
+EXPÉRIENCES PROFESSIONNELLES
+
+TRANSBORD, Lyon - Plateforme de transport multimodal, 120 salariés
+Lead developer, de mars 2022 à aujourd'hui
+
+Contexte : monolithe Django de dix ans, équipe de six développeurs, déploiements mensuels et peu fiables.
+
+Management
+- Encadrement de six développeurs : entretiens individuels, objectifs, plans de progression
+- Recrutement de quatre personnes : fiche de poste, exercice technique, entretiens
+- Mise en place de rituels d'équipe et d'une revue d'architecture mensuelle
+
+Architecture
+- Découpage progressif du monolithe en services FastAPI (réservation, tarification, facturation)
+- Choix et mise en place d'un bus d'événements RabbitMQ
+- Stratégie de migration de données sans coupure de service
+- Rédaction de 30 notes de décision d'architecture
+
+Résultats
+- Déploiements mensuels devenus quotidiens
+- Incidents majeurs : de 11 en 2022 à 2 en 2025
+- Temps de réponse médian de l'API divisé par trois
+
+Environnement : Python 3.11, Django, FastAPI, Celery, PostgreSQL, Redis, RabbitMQ, Kubernetes, ArgoCD, Datadog, GitLab
+
+HALLE NUMÉRIQUE, Lyon - Éditeur d'une solution de réservation de salles, 45 salariés
+Développeur Python senior, de janvier 2018 à février 2022
+
+- Développement de l'API de réservation (Django REST Framework), 2 millions d'appels par jour
+- Gestion des conflits de réservation et des règles de tarification
+- Traitements asynchrones avec Celery : relances, facturation, exports comptables
+- Mise en place de l'observabilité : journaux structurés, métriques, alertes
+- Migration d'un serveur physique vers Kubernetes
+- Tuteur de deux alternants
+- Référent sécurité : audit annuel, correction des vulnérabilités, formation de l'équipe
+- Membre du groupe qui a préparé la certification ISO 27001
+
+Environnement : Python 3, Django, DRF, Celery, PostgreSQL, Redis, Docker, Kubernetes, Prometheus, Grafana
+
+COOP'INFO, Villeurbanne - Coopérative de services numériques pour le monde associatif
+Développeur, de septembre 2016 à décembre 2017
+
+- Applications Django pour une dizaine d'associations : adhésions, dons, événements
+- Formation des bénévoles à l'utilisation des outils
+- Hébergement et sauvegardes sur serveurs Debian
+
+STAGES ET JOBS
+2016 - Stage de fin d'études, Halle Numérique : prototype de moteur de recherche de salles
+2015 - Stage, Mairie de Saint-Alban : inventaire du parc informatique
+2012 à 2015 - Équipier de restauration rapide, en parallèle des études
+
+FORMATION
+2016 - Master génie logiciel, Université de Saint-Alban
+2014 - Licence informatique, Université de Saint-Alban
+2011 - Baccalauréat scientifique
+
+CERTIFICATIONS
+2023 - Certified Kubernetes Administrator
+2021 - AWS Certified Developer Associate
+2020 - Formation management d'équipe technique, 5 jours
+
+CONFÉRENCES ET PUBLICATIONS
+2025 - « Sortir du monolithe sans tout casser », conférence Python nationale
+2024 - « Dix ans de dette, et après ? », meetup Python Lyon
+2023 - Article de blog, « Écrire une note de décision utile »
+
+COMPÉTENCES TECHNIQUES
+Langages : Python (10 ans), SQL, Go (notions), JavaScript, Bash
+Frameworks : Django, DRF, FastAPI, Flask, Celery, SQLAlchemy, pytest
+Bases : PostgreSQL, MySQL, Redis, Elasticsearch
+Infrastructure : Docker, Kubernetes, Helm, ArgoCD, Terraform, Ansible, AWS, GCP
+Observabilité : Prometheus, Grafana, Datadog, Sentry
+Méthodes : Scrum, Kanban, TDD, DDD, revue de code, pair programming
+
+COMPÉTENCES HUMAINES
+Leadership, communication, écoute, pédagogie, gestion de conflits, sens du résultat
+
+LANGUES
+Français (langue maternelle), Anglais (C1, conférences en anglais), Peul (courant)
+
+CENTRES D'INTÉRÊT
+Basket en club depuis quinze ans, entraîneur des moins de 13 ans. Cuisine. Lecture, surtout de la science-fiction. Voyages.
+
+RÉFÉRENCES
+Disponibles sur demande.
