@@ -1,3 +1,4 @@
+# --- personal / candidate data: NEVER commit (public repository) ---------
 # Données candidats : ne jamais versionner (CV, base, index, exports)
 data/
 exports/
@@ -6,14 +7,50 @@ exports/
 *.db-shm
 *.sqlite
 *.sqlite3
+*.sqlite3-*
+uploads/
+# real CVs dropped anywhere by mistake
+*.pdf
+*.docx
+*.jpg
+*.jpeg
+*.png
+# only the generated synthetic demo files at the top of demo_data/ are tracked
+!demo_data/*.pdf
+!demo_data/*.docx
+# third-party / externally provided kits are never committed (may contain real CVs)
+demo_data/kit/
+images/
 
-# Environnement Python
-.venv/
-__pycache__/
-*.pyc
-
-# Secrets éventuels
+# --- secrets ---------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!frontend/.env.example
 .streamlit/secrets.toml
 
 # Réglages Claude Code personnels
 .claude/settings.local.json
+
+# --- python ---------------------------------------------------------------
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+*.egg-info/
+
+# --- node / next ----------------------------------------------------------
+node_modules/
+.next/
+.next-prod/
+out/
+*.tsbuildinfo
+next-env.d.ts
+
+# --- misc -----------------------------------------------------------------
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+graphify-out/

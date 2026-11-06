@@ -1,0 +1,24 @@
+Sam Placeholder
+DevOps / Cloud Engineer
+sam.placeholder@example.test
+
+Profile
+Cloud engineer with 7 years of experience operating containerised platforms.
+
+Professional Experience
+Senior DevOps Engineer — Eta Cloud Services (2020-02 – present)
+- Operated Kubernetes clusters (EKS) hosting 120 microservices.
+- Wrote Terraform modules and Helm charts; managed AWS infrastructure.
+- Set up Prometheus and Grafana monitoring and on-call runbooks.
+
+System Administrator — Theta Hosting (2017-01 – 2020-01)
+- Linux administration, Bash scripting and Ansible automation.
+
+Education
+BSc Computer Science — Example State University (2016)
+
+Skills
+Kubernetes, Terraform, AWS, Helm, Docker, Prometheus, Grafana, Linux, Bash, Ansible, Python
+
+Certifications
+Certified Kubernetes Administrator (CKA) (2021)

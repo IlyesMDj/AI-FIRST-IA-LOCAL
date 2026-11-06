@@ -1,0 +1,13 @@
+fastapi==0.115.12
+uvicorn==0.34.2
+pydantic==2.11.4
+pydantic-settings==2.14.1
+SQLAlchemy==2.0.41
+httpx==0.28.1
+python-multipart==0.0.33
+pypdfium2==5.15.0
+python-docx==1.1.2
+numpy==1.26.4
+psutil==7.1.0
+# local OCR for scanned PDFs (ships its own ONNX models, CPU, offline)
+rapidocr-onnxruntime==1.4.4

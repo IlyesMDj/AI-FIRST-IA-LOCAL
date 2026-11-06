@@ -1,0 +1,26 @@
+# Optional containerised run. Ollama keeps running on the HOST (GPU access on
+# Windows is simplest natively). Ports are published on 127.0.0.1 only.
+services:
+  backend:
+    build: ./backend
+    environment:
+      RCL_OLLAMA_URL: http://host.docker.internal:11434
+      RCL_ALLOWED_ORIGINS: '["http://localhost:3000","http://127.0.0.1:3000"]'
+    volumes:
+      - ./data:/data          # candidate data stays in ./data on the host
+    ports:
+      - "127.0.0.1:8000:8000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+    environment:
+      BACKEND_URL: http://backend:8000
+    ports:
+      - "127.0.0.1:3000:3000"
+    depends_on:
+      - backend
+    restart: unless-stopped

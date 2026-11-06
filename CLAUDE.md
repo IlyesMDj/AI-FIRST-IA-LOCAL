@@ -1,23 +1,49 @@
-# Recruiter Copilot local · hackathon AI First × 42 Paris (édition 11)
+# CLAUDE.md – Recruiter Copilot Local
 
-Assistant RH qui analyse 20 CV fictifs et une fiche de poste avec un modèle **local**. Brief : https://ai-first-42-recruiter-copilot.trybailey.app/
+Guidance for AI coding agents working on this repository.
 
-## Règles non négociables
-- **Aucun CV vers une IA distante.** Le seul modèle appelé est Ollama sur `http://127.0.0.1:11434`. Jamais de modèle `-cloud`.
-- **Claude Code est une IA distante.** Ne lis jamais `data/` : CV, base, index, exports. Pour tester, écris toi-même de faux CV dans `samples/`.
-- **Minimisation.** N'extraire que ce qui sert au poste : expériences, compétences, formations, langues, liens professionnels. Jamais l'adresse, la date de naissance, l'âge, la photo ou la situation familiale.
-- **La décision reste humaine.** L'app compare sur des critères visibles tirés de la fiche de poste. Elle sépare les faits du CV des interprétations du modèle.
-- **Supprimer efface tout.** Supprimer un candidat efface toutes ses copies : fichier original, lignes SQLite avec `PRAGMA secure_delete = ON`, cache, session et index éventuel.
+## Règles du hackathon (from `main`, still apply)
 
-## Stack
-- Python 3.12 dans `.venv/`. Lancer l'app : `.venv\Scripts\streamlit run app.py`, puis ouvrir http://127.0.0.1:8501
-- Streamlit : télémétrie coupée et écoute locale seulement (voir `.streamlit/config.toml`)
-- Ollama avec `ministral-3:3b` (Mistral AI, Apache 2.0) : sorties JSON structurées via le paramètre `format`, et `OLLAMA_NO_CLOUD=1`
-- SQLite pour les données structurées ; `pypdf` et `python-docx` pour extraire le texte des CV
+- **Aucun CV vers une IA distante.** Le seul modèle appelé est Ollama sur `http://127.0.0.1:11434`. Jamais de modèle `-cloud` (set `OLLAMA_NO_CLOUD=1`).
+- **Claude Code est une IA distante.** Ne lis jamais `data/` : CV, base, index, exports (blocked by `.claude/settings.json`). Pour tester, utilise des CV fictifs (`samples/`, `backend/app/demo/synthetic.py`).
+- **Minimisation.** N'extraire que ce qui sert au poste. Jamais l'adresse, la date de naissance, l'âge, la photo ou la situation familiale.
+- **La décision reste humaine.** Critères visibles tirés de la fiche de poste ; faits du CV séparés des interprétations du modèle.
+- **Supprimer efface tout** : fichier original, lignes SQLite (`PRAGMA secure_delete = ON`), index, conversations, caches.
+- Avant la démo : lancer le sous-agent `privacy-auditor`, puis couper le réseau et dérouler import → réponse utile → suppression → carte des flux → registre.
 
-## Livrables, dans `docs/`
-- `data-lifecycle-map.md` : flux réels, copies, accès et effacement, en Mermaid
-- `registre.md` : les 7 champs (finalité, personnes et données, base légale, accès, stockage, durée et suppression, sécurité)
+Stack on this branch: FastAPI backend (`backend/`) + Next.js UI (`frontend/`), default model `qwen3:8b` (see `docs/model-benchmark.md`; any installed Ollama model can be selected in AI settings). The Streamlit starter files from `main` are kept but not used.
 
-## Avant la démo
-Lancer le sous-agent `privacy-auditor`. Puis couper le réseau et dérouler : import d'un CV, réponse utile, suppression, carte des flux, registre.
+## Non-negotiable rules
+
+- **Never read, open, print, upload or commit real CVs or candidate data.** Use only `backend/app/demo/synthetic.py` and the generated files at the top level of `demo_data/`. Do not open `data/` (runtime candidate data), `demo_data/kit/` or `images/` (provided externally, may contain real CVs) unless the user confirms the content is synthetic.
+- No external AI/inference provider, analytics, telemetry or cloud SDK. All inference goes through `app/llm/gateway.py` → Ollama on a loopback host.
+- No feature may compute a candidate score, ranking, winner, shortlist, or hire/reject recommendation.
+- LLM output must never reach the DB without Pydantic validation (`LLMGateway.generate_structured`) and evidence verification (`services/evidence.py`).
+- Logs and `LifecycleEvent.details` must not contain personal data (ids, counts, model names, durations only).
+- Any new table holding candidate-derived data needs `candidate_id` with `ON DELETE CASCADE` **and** must be added to `services/deletion.py` (explicit delete + verification count) and to the deletion tests.
+
+## Layout
+
+- `backend/app/llm/` – Ollama client (loopback guard), gateway (global inference lock, RAM check, structured output + repair), prompts (injection-resistant, nonce delimiters).
+- `backend/app/services/` – documents (PDF/DOCX/TXT, OCR fallback), privacy (redaction, injection detection), candidates (pipeline), analysis, interview, assistant, vector_store (SQLite BLOB vectors, candidate-scoped search), deletion, benchmark, hardware.
+- `backend/app/api/` – FastAPI routers under `/api`.
+- `backend/app/worker.py` – single background worker (sequential inference).
+- `frontend/app/` – Next.js App Router pages; `frontend/components/ui` vendored shadcn-style primitives; API proxied via `next.config.mjs` rewrites.
+
+## Commands
+
+```powershell
+cd backend; .\.venv\Scripts\python -m pytest              # must stay green
+cd backend; .\.venv\Scripts\python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+cd frontend; npm run typecheck; npm run build; npx next start -p 3000 -H 127.0.0.1
+```
+
+Real-model integration test: `RCL_TEST_OLLAMA=1 pytest tests/test_ollama_integration.py -s`.
+
+## Conventions
+
+- Python 3.12, type hints, Pydantic v2, SQLAlchemy 2 typed ORM. User-facing error messages live in exceptions' `user_message`.
+- Frontend: TypeScript strict, Tailwind tokens from `app/globals.css` (light + dark), no technical jargon in recruiter-facing text.
+- React 19 + recent Chrome: `useEffect` callbacks must use a block body (`() => { ... }`) – `scrollIntoView()` now returns a Promise, and an expression body would hand it to React as a cleanup function.
+- **i18n (FR/EN)**: UI strings are English source strings wrapped in `t("…")` (`useI18n()`), or `N_("…")` in constant tables; French goes in `frontend/lib/i18n-fr.ts`. `npm run check:i18n` must report 0 missing. Backend user-facing messages stay in English in code and need a French entry in `backend/app/i18n.py` (`tests/test_i18n.py` fails otherwise); they are translated at response time from the `X-Lang` header.
+- Bump `PROMPT_VERSION` in `app/llm/prompts.py` when prompts change.

@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Visual direction: "data-center HUD" (images/template.jpg) – deep navy space,
+   electric-blue framed panels with corner markers, cyan glow accents,
+   condensed uppercase display type. Dark is the default theme; a light
+   variant keeps the same identity for bright environments. */
+
+@layer base {
+  :root {
+    --background: 216 45% 96%;
+    --foreground: 222 55% 12%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 55% 12%;
+    --sidebar: 218 50% 98%;
+    --primary: 214 90% 46%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 40% 92%;
+    --secondary-foreground: 222 50% 18%;
+    --muted: 216 40% 94%;
+    --muted-foreground: 218 20% 40%;
+    --accent: 210 90% 93%;
+    --accent-foreground: 214 90% 32%;
+    --destructive: 352 75% 48%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 162 70% 32%;
+    --warning: 36 92% 40%;
+    --info: 199 90% 40%;
+    --border: 214 45% 84%;
+    --input: 214 40% 80%;
+    --ring: 199 95% 45%;
+    --radius: 0.75rem;
+    --glow: 214 90% 50%;
+    --glow-2: 191 100% 45%;
+    --hud-line: 214 70% 70%;
+  }
+  .dark {
+    --background: 222 70% 5%;
+    --foreground: 208 60% 94%;
+    --card: 222 62% 9%;
+    --card-foreground: 208 60% 94%;
+    --sidebar: 223 72% 6%;
+    --primary: 197 100% 56%;
+    --primary-foreground: 222 80% 7%;
+    --secondary: 220 55% 15%;
+    --secondary-foreground: 208 60% 92%;
+    --muted: 221 52% 13%;
+    --muted-foreground: 211 40% 70%;
+    --accent: 214 78% 18%;
+    --accent-foreground: 194 100% 76%;
+    --destructive: 352 85% 62%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 158 70% 52%;
+    --warning: 40 95% 60%;
+    --info: 197 100% 62%;
+    --border: 216 70% 24%;
+    --input: 216 60% 28%;
+    --ring: 194 100% 60%;
+    --glow: 216 100% 58%;
+    --glow-2: 190 100% 58%;
+    --hud-line: 205 100% 70%;
+  }
+  * {
+    @apply border-border;
+  }
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    min-height: 100vh;
+  }
+  /* Space backdrop: soft top glow + faint perspective grid at the bottom */
+  .dark body {
+    background:
+      radial-gradient(1200px 520px at 50% -180px, hsl(var(--glow) / 0.22), transparent 70%),
+      radial-gradient(900px 300px at 50% 115%, hsl(var(--glow-2) / 0.16), transparent 70%),
+      linear-gradient(hsl(var(--glow) / 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+      linear-gradient(90deg, hsl(var(--glow) / 0.045) 1px, transparent 1px) 0 0 / 48px 48px,
+      hsl(var(--background));
+    background-attachment: fixed;
+  }
+  body {
+    background:
+      radial-gradient(1100px 420px at 50% -200px, hsl(var(--glow) / 0.10), transparent 70%),
+      hsl(var(--background));
+    background-attachment: fixed;
+  }
+  h1, h2, h3, .font-display {
+    font-family: theme("fontFamily.display");
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  /* Framed panel with "+" corner markers (template panels) */
+  .hud-panel {
+    position: relative;
+    background: linear-gradient(180deg, hsl(var(--card) / 0.96), hsl(var(--card) / 0.9));
+    box-shadow: 0 1px 2px hsl(var(--glow) / 0.06);
+  }
+  .dark .hud-panel {
+    background: linear-gradient(180deg, hsl(218 70% 13% / 0.72), hsl(222 70% 8% / 0.78));
+    border-color: hsl(var(--glow) / 0.38);
+    box-shadow:
+      inset 0 0 0 1px hsl(var(--glow) / 0.06),
+      inset 0 0 28px hsl(var(--glow) / 0.10),
+      0 0 22px hsl(var(--glow) / 0.10);
+    backdrop-filter: blur(6px);
+  }
+  .hud-panel::before,
+  .hud-panel::after {
+    content: "";
+    position: absolute;
+    top: 9px;
+    width: 9px;
+    height: 9px;
+    pointer-events: none;
+    background:
+      linear-gradient(hsl(var(--hud-line) / 0.55), hsl(var(--hud-line) / 0.55)) center / 1px 100% no-repeat,
+      linear-gradient(hsl(var(--hud-line) / 0.55), hsl(var(--hud-line) / 0.55)) center / 100% 1px no-repeat;
+  }
+  .hud-panel::before { left: 9px; }
+  .hud-panel::after { right: 9px; }
+  .hud-flat::before,
+  .hud-flat::after { display: none; }
+
+  /* Uppercase, tracked display titles with a glow in dark mode */
+  .hud-title {
+    font-family: theme("fontFamily.display");
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .dark .hud-title {
+    background: linear-gradient(180deg, #ffffff 30%, hsl(var(--accent-foreground)));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 22px hsl(var(--glow) / 0.35);
+  }
+  .hud-label {
+    font-family: theme("fontFamily.display");
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 11px;
+  }
+  .dark .hud-glow-text {
+    text-shadow: 0 0 14px hsl(var(--glow-2) / 0.55);
+  }
+  /* Bracketed header rule:  •────  TITLE  ────• */
+  .hud-rule {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, hsl(var(--hud-line) / 0.7) 18%, hsl(var(--hud-line) / 0.7) 82%, transparent);
+    position: relative;
+  }
+  .hud-rule::before,
+  .hud-rule::after {
+    content: "";
+    position: absolute;
+    top: -2px;
+    width: 5px;
+    height: 5px;
+    border-radius: 9999px;
+    background: hsl(var(--glow-2));
+    box-shadow: 0 0 8px hsl(var(--glow-2));
+  }
+  .hud-rule::before { left: 18%; }
+  .hud-rule::after { right: 18%; }
+
+  .btn-glow {
+    background: linear-gradient(180deg, hsl(var(--primary)), hsl(var(--glow)));
+  }
+  .dark .btn-glow {
+    background: linear-gradient(180deg, hsl(194 100% 62%), hsl(214 100% 56%));
+    box-shadow: 0 0 0 1px hsl(194 100% 70% / 0.5), 0 0 18px hsl(var(--glow-2) / 0.35);
+  }
+  .dark .btn-glow:hover {
+    box-shadow: 0 0 0 1px hsl(194 100% 75% / 0.7), 0 0 26px hsl(var(--glow-2) / 0.5);
+  }
+  .dark .btn-frame {
+    background: hsl(218 70% 12% / 0.6);
+    border-color: hsl(var(--glow) / 0.45);
+  }
+  .dark .btn-frame:hover {
+    background: hsl(214 78% 18% / 0.8);
+    border-color: hsl(var(--glow-2) / 0.7);
+    box-shadow: 0 0 14px hsl(var(--glow) / 0.25);
+  }
+  .dark .nav-active {
+    background: linear-gradient(90deg, hsl(var(--glow) / 0.28), hsl(var(--glow) / 0.04));
+    box-shadow: inset 2px 0 0 hsl(var(--glow-2)), 0 0 18px hsl(var(--glow) / 0.12);
+  }
+}
+
+@layer utilities {
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media print {
+  body { background: white !important; }
+  .hud-panel { box-shadow: none !important; background: white !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
