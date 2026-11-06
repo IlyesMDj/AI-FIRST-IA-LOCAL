@@ -1,7 +1,10 @@
-# Versions figées : moins de surprises le jour de la démo, et une liste claire pour le registre.
-streamlit==1.67.0
-pypdf==7.0.0
-python-docx==1.2.0
-ollama==0.6.3
-pydantic==2.14.3
-httpx==0.28.1
+# Dépendances Python du backend (backend/copilot) et de scripts/check_local.py.
+# À figer avec `pip freeze` une fois l'installation validée sur un poste de l'équipe.
+fastapi
+uvicorn
+python-multipart
+pymupdf
+pydantic
+ollama
+httpx
+pytest
