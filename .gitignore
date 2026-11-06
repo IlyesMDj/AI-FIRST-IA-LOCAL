@@ -1,0 +1,19 @@
+# Données candidats : ne jamais versionner (CV, base, index, exports)
+data/
+exports/
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Environnement Python
+.venv/
+__pycache__/
+*.pyc
+
+# Secrets éventuels
+.streamlit/secrets.toml
+
+# Réglages Claude Code personnels
+.claude/settings.local.json
