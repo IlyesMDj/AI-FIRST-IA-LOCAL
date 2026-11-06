@@ -1,0 +1,21 @@
+Zéphyrine Quintal-Ardoise
+Développeuse Python / Data — 34 ans
+Née le 12/03/1990 à Saint-Brieuc
+Nationalité : française
+Mariée, 2 enfants
+14 bis rue des Glycines Imaginaires, 35000 Rennes
+Tél : 06 12 34 56 78 — zephyrine.quintal@exemple-fictif.fr
+linkedin.com/in/zephyrine-quintal-fictive
+github.com/zquintal-fictive
+Photo
+
+EXPÉRIENCE
+2018-2022 : Ingénieure données chez Nébuleuse Logicielle SARL (Python, PostgreSQL, Airflow)
+2022-2025 : Lead data chez Ornithorynque Analytics (Kubernetes, dbt, FastAPI)
+Plus de 8 ans d'expérience en ingénierie de données.
+
+FORMATION
+2017 : Master Informatique, Université Fictive de Bretagne
+
+COMPÉTENCES
+Python, SQL, Docker, Terraform, anglais courant (TOEIC 945)

@@ -1,0 +1,22 @@
+# --- Données personnelles : JAMAIS dans le dépôt -----------------------------
+data/
+kit/
+*.db
+*.db-journal
+*.db-wal
+*.sqlite*
+
+# --- Environnements / build ---------------------------------------------------
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+web/node_modules/
+web/dist/
+web/.vite/
+
+# --- Hors projet ----------------------------------------------------------------
+AI-FIRST-IA-LOCAL/
+42/
+.claude/
+*.log

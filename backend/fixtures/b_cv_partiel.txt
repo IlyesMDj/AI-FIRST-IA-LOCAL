@@ -1,0 +1,22 @@
+YANIS BELKACEM
+Développeur web
+[email retiré] | [telephone retiré] | [lien_perso retiré]
+[age retiré] — [situation_familiale retirée]
+
+EXPÉRIENCES
+
+Développeur PHP / Python — Agence Pixelune, Tours (2022 – 2025)
+• Sites vitrines et e-commerce sous Symfony et WordPress.
+• Écriture de quelques scripts Python d'automatisation (export de commandes, envoi de rapports).
+• Base de données MySQL : requêtes et sauvegardes.
+• Travail en équipe de 4 avec un chef de projet.
+
+Stagiaire développeur — Mairie de Blois (2021, 6 mois)
+• Refonte d'un outil interne de réservation de salles en Flask.
+
+FORMATION
+BUT Informatique — IUT de Blois (2022)
+
+COMPÉTENCES
+PHP, Symfony, Python (bases), Flask, MySQL, HTML/CSS, JavaScript, Git
+Anglais : lu (documentation)
