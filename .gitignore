@@ -1,19 +1,37 @@
-# Données candidats : ne jamais versionner (CV, base, index, exports)
-data/
+# --- Données personnelles : JAMAIS dans le dépôt (dépôt PUBLIC) --------------
+# Chemins ancrés à la racine : un dossier docs/data/ resterait versionné.
+/data/
+/kit/
 exports/
 *.db
+*.db-journal
 *.db-wal
 *.db-shm
-*.sqlite
-*.sqlite3
+*.sqlite*
+# CV déposés par erreur n'importe où (les fixtures fictives sont en .txt / .md / .json)
+*.pdf
+*.docx
+*.png
+*.jpg
+*.jpeg
 
-# Environnement Python
+# --- Secrets -----------------------------------------------------------------
+.env
+.env.*
+!web/.env.mock
+
+# --- Environnements / build ---------------------------------------------------
 .venv/
 __pycache__/
 *.pyc
+.pytest_cache/
+web/node_modules/
+web/dist/
+web/.vite/
 
-# Secrets éventuels
-.streamlit/secrets.toml
-
-# Réglages Claude Code personnels
+# --- Hors projet ----------------------------------------------------------------
+AI-FIRST-IA-LOCAL/
+42/
+# Réglages Claude Code personnels (.claude/settings.json et les agents restent versionnés)
 .claude/settings.local.json
+*.log

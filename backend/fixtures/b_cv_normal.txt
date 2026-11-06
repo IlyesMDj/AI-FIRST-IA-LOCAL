@@ -1,0 +1,37 @@
+Camille Ferrand
+Développeuse back-end Python
+[email retiré] — [telephone retiré] — [adresse retirée]
+github.com/cferrand-dev
+
+PROFIL
+Développeuse Python depuis 6 ans, spécialisée dans les API web et les bases de données relationnelles.
+J’aime la qualité logicielle, les tests et la transmission aux développeurs qui débutent.
+
+EXPÉRIENCE PROFESSIONNELLE
+
+2021 – aujourd’hui : Développeuse back-end senior — Logipôle (éditeur logiciel, 120 personnes), Rennes
+- Conception d’une API REST avec FastAPI servant 2 millions de requêtes par jour.
+- Migration d’un back-office Django 2.2 vers Django 4.2.
+- Optimisation de requêtes SQL sur PostgreSQL (temps de réponse divisé par 3 sur les rapports).
+- Mise en place de la CI GitLab : lint, tests pytest, build d’images Docker.
+- Mentorat de 3 développeurs juniors : revues de code, binômage hebdomadaire.
+
+2018 – 2021 : Développeuse Python — DataFlot (start-up), Nantes
+- Développement de scripts d’ingestion de données (pandas, SQLAlchemy).
+- Écriture de tests unitaires et d’intégration avec pytest.
+- Déploiement sur des serveurs Linux, premiers pas avec Docker Compose.
+
+FORMATION
+2018 : Master Informatique, parcours génie logiciel — Université de Nantes
+2016 : Licence Informatique — Université d’Angers
+
+COMPÉTENCES
+Python, Django, FastAPI, PostgreSQL, SQLAlchemy, pytest, GitLab CI, Docker, Linux, Git
+Notions : Kubernetes (formation suivie en 2023)
+
+LANGUES
+Anglais : courant (documentation technique, conférences PyCon FR et EuroPython)
+Espagnol : notions
+
+CENTRES D’INTÉRÊT
+Escalade, contribution au projet open source « django-plannings »

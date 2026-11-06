@@ -1,0 +1,9 @@
+[
+  {"id": "C1", "label": "Python en production (4 ans et plus)", "description": "Expérience de développement Python sur des applications en production."},
+  {"id": "C2", "label": "Framework web Django ou FastAPI", "description": "Projets réalisés avec Django ou FastAPI."},
+  {"id": "C3", "label": "SQL et PostgreSQL", "description": "Requêtes, schéma, optimisation sur une base relationnelle."},
+  {"id": "C4", "label": "Tests automatisés et CI", "description": "pytest, intégration continue (GitLab CI ou équivalent)."},
+  {"id": "C5", "label": "Docker", "description": "Conteneurisation et déploiement avec Docker."},
+  {"id": "C6", "label": "Anglais technique", "description": "Lecture et rédaction de documentation en anglais."},
+  {"id": "C7", "label": "Mentorat / encadrement", "description": "Accompagnement de développeurs juniors, revues de code."}
+]

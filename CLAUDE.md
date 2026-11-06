@@ -1,23 +1,23 @@
-# Recruiter Copilot local · hackathon AI First × 42 Paris (édition 11)
+# Recruiter Copilot — hackathon IA souveraine (AI First × 42 Paris, 2026-11-06)
 
-Assistant RH qui analyse 20 CV fictifs et une fiche de poste avec un modèle **local**. Brief : https://ai-first-42-recruiter-copilot.trybailey.app/
+## RÈGLE D'OR (non négociable)
+- L'assistant de code (Claude Code) ne lit JAMAIS les candidatures : ni `kit/` (CV du kit), ni aucun CV importé, ni `data/` (base, index, exports dérivés). `.claude/settings.json` bloque `data/` et `kit/` pour Claude Code.
+- CV autorisés : `cv-exemple-agent.md`, ainsi que les fixtures fictives de `backend/fixtures/` et `samples/`.
+- Interdit : `cat`, `grep`, `Read`, `ls` détaillé ou tout script qui afficherait le contenu des CV dans la conversation. Pour tester sur les vrais CV du kit, c'est l'utilisateur qui lance l'application lui-même.
+- Les sorties de l'application sur les CV (résumés, questions…) ne doivent pas non plus être collées ou lues ici.
+- Le dépôt GitHub est **public** : aucun CV ni aucune base ne doit être commité (voir `.gitignore`).
 
-## Règles non négociables
-- **Aucun CV vers une IA distante.** Le seul modèle appelé est Ollama sur `http://127.0.0.1:11434`. Jamais de modèle `-cloud`.
-- **Claude Code est une IA distante.** Ne lis jamais `data/` : CV, base, index, exports. Pour tester, écris toi-même de faux CV dans `samples/`.
-- **Minimisation.** N'extraire que ce qui sert au poste : expériences, compétences, formations, langues, liens professionnels. Jamais l'adresse, la date de naissance, l'âge, la photo ou la situation familiale.
-- **La décision reste humaine.** L'app compare sur des critères visibles tirés de la fiche de poste. Elle sépare les faits du CV des interprétations du modèle.
-- **Supprimer efface tout.** Supprimer un candidat efface toutes ses copies : fichier original, lignes SQLite avec `PRAGMA secure_delete = ON`, cache, session et index éventuel.
+## Contraintes imposées
+- Le traitement IA des candidatures se fait en local, avec Ollama sur http://127.0.0.1:11434 et `OLLAMA_NO_CLOUD=1`.
+  - Modèle par défaut : `ministral-3:3b` (« rapide »).
+  - Modèle en option : `ministral-3:8b` (« précis »).
+  - Jamais de modèle `-cloud`.
+- Un candidat doit pouvoir être effacé de façon vérifiable : le CV et tout ce qui en dérive (texte extrait, fiche, embeddings, cache, journaux).
+- L'humain décide : pas de classement automatique ni de recommandation d'embauche.
+- Ne garder que les données utiles au poste : écarter l'âge, la date de naissance, la photo, la situation familiale, la nationalité, la santé, etc.
 
-## Stack
-- Python 3.12 dans `.venv/`. Lancer l'app : `.venv\Scripts\streamlit run app.py`, puis ouvrir http://127.0.0.1:8501
-- Streamlit : télémétrie coupée et écoute locale seulement (voir `.streamlit/config.toml`)
-- Ollama avec `ministral-3:3b` (Mistral AI, Apache 2.0) : sorties JSON structurées via le paramètre `format`, et `OLLAMA_NO_CLOUD=1`
-- SQLite pour les données structurées ; `pypdf` et `python-docx` pour extraire le texte des CV
-
-## Livrables, dans `docs/`
-- `data-lifecycle-map.md` : flux réels, copies, accès et effacement, en Mermaid
-- `registre.md` : les 7 champs (finalité, personnes et données, base légale, accès, stockage, durée et suppression, sécurité)
+## Livrables
+A. Prototype (`backend/` + `web/`), B. Carte du cycle de vie des données (`docs/cycle-de-vie.md`), C. Registre simplifié (`docs/registre.md`). Les livrables B et C doivent rester cohérents avec le code réel.
 
 ## Avant la démo
-Lancer le sous-agent `privacy-auditor`. Puis couper le réseau et dérouler : import d'un CV, réponse utile, suppression, carte des flux, registre.
+Lancer le sous-agent `privacy-auditor`. Puis, Wi-Fi coupé : `python scripts/check_local.py`, et dérouler import → réponse utile → effacement → carte → registre.
