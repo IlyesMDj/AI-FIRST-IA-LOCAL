@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type ReactNode, type RefObject } from "react";
 import {
   ArrowLeft,
   EyeOff,
@@ -39,26 +39,173 @@ type Range = { start: number; end: number; key: number };
 
 // --- Texte masqué du CV, avec surlignage -----------------------------------
 
+// Marqueurs posés par le masquage côté serveur : « [email retiré] », « [date_naissance retirée] »…
+const REDACTION_RE = /\[[^\]\n]{1,48}retir[ée]+(?:\(e\))?\]/g;
+const BULLET_RE = /^(\s*)([-•*–▪◦·]|\d{1,2}[.)])\s+/;
+const PERIOD_RE = /^(\s*)((?:(?:janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)[a-zéû.]*\s+)?(?:19|20)\d{2}\s*(?:[-–—à/]|au|to)\s*(?:(?:janv|févr|mars|avr|mai|juin|juil|août|sept|oct|nov|déc)[a-zéû.]*\s+)?(?:(?:19|20)\d{2}|aujourd'hui|présent|actuel|now|today))/i;
+
+/** « [situation_familiale retirée] » → « Situation familiale masquée ». */
+function redactionLabel(piece: string): string {
+  const key = piece.replace(/^\[|\]$/g, "").replace(/\s*retir[ée]+(?:\(e\))?$/, "").trim();
+  const label = REMOVED_LABELS[key] ?? key.replace(/_/g, " ");
+  return `${label.charAt(0).toUpperCase()}${label.slice(1)} masqué(e)`;
+}
+
+type LineKind = "name" | "heading" | "bullet" | "text" | "blank";
+
+function classify(line: string, isFirst: boolean): LineKind {
+  const t = line.trim();
+  if (!t) return "blank";
+  if (BULLET_RE.test(line)) return "bullet";
+  const letters = t.replace(/[^A-Za-zÀ-ÿ]/g, "");
+  const upper = letters.length >= 3 && letters === letters.toUpperCase();
+  if (upper && t.length <= 60 && !REDACTION_RE.test(t)) {
+    REDACTION_RE.lastIndex = 0;
+    return isFirst ? "name" : "heading";
+  }
+  REDACTION_RE.lastIndex = 0;
+  if (t.length <= 42 && t.endsWith(":")) return "heading";
+  if (isFirst && t.length <= 48 && !t.includes("@")) return "name";
+  return "text";
+}
+
+/** Rend un morceau [from, to) du texte : étiquettes de masquage + surlignage de la citation, offsets exacts. */
+function Inline({ text, from, to, hl, markRef }: { text: string; from: number; to: number; hl: { start: number; end: number; key: number } | null; markRef: RefObject<HTMLElement | null> }) {
+  const cuts = new Set([from, to]);
+  const redactions: [number, number][] = [];
+  REDACTION_RE.lastIndex = 0;
+  const slice = text.slice(from, to);
+  for (const m of slice.matchAll(REDACTION_RE)) {
+    const s = from + (m.index ?? 0);
+    redactions.push([s, s + m[0].length]);
+    cuts.add(s);
+    cuts.add(s + m[0].length);
+  }
+  if (hl) {
+    if (hl.start > from && hl.start < to) cuts.add(hl.start);
+    if (hl.end > from && hl.end < to) cuts.add(hl.end);
+  }
+  const points = [...cuts].sort((a, b) => a - b);
+  const out: ReactNode[] = [];
+  let firstMarked = true;
+  for (let i = 0; i < points.length - 1; i++) {
+    const a = points[i], b = points[i + 1];
+    if (a >= b) continue;
+    const piece = text.slice(a, b);
+    const isRed = redactions.some(([s, e]) => a >= s && b <= e);
+    let node: ReactNode = isRed ? (
+      <span className="cv-redacted" title="Donnée écartée à l'import : jamais stockée ni envoyée à l'IA">
+        <EyeOff className="size-3" aria-hidden />
+        {redactionLabel(piece)}
+      </span>
+    ) : (
+      piece
+    );
+    const inHl = hl && a >= hl.start && b <= hl.end;
+    if (inHl) {
+      node = (
+        <mark key={`m${hl!.key}-${a}`} ref={firstMarked ? (markRef as RefObject<HTMLElement>) : undefined} className="cv-highlight">
+          {node}
+        </mark>
+      );
+      firstMarked = false;
+    } else {
+      node = <span key={a}>{node}</span>;
+    }
+    out.push(node);
+  }
+  return <>{out}</>;
+}
+
 function CvText({ text, range }: { text: string; range: Range | null }) {
   const markRef = useRef<HTMLElement>(null);
+  const [raw, setRaw] = useState(false);
   useLayoutEffect(() => {
     markRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-  }, [range?.key]);
+  }, [range?.key, raw]);
 
-  const valid = range && range.start >= 0 && range.end <= text.length && range.start < range.end;
+  const hl = range && range.start >= 0 && range.end <= text.length && range.start < range.end ? range : null;
+
+  // Découpe en lignes en gardant les offsets d'origine (le surlignage reste exact).
+  const lines: { start: number; end: number }[] = [];
+  let pos = 0;
+  for (const l of text.split("\n")) {
+    lines.push({ start: pos, end: pos + l.length });
+    pos += l.length + 1;
+  }
+  let seenContent = false;
+
   return (
-    <div className="max-h-[70vh] overflow-auto px-5 pb-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap">
-      {valid ? (
-        <>
-          {text.slice(0, range.start)}
-          <mark key={range.key} ref={markRef} className="cv-highlight">
-            {text.slice(range.start, range.end)}
-          </mark>
-          {text.slice(range.end)}
-        </>
-      ) : (
-        text
-      )}
+    <div className="px-5 pb-5">
+      <div className="mb-3 flex justify-end">
+        <div className="bg-muted inline-flex rounded-full p-0.5 text-xs" role="radiogroup" aria-label="Affichage du CV">
+          {[false, true].map((r) => (
+            <button
+              key={String(r)}
+              role="radio"
+              aria-checked={raw === r}
+              onClick={() => setRaw(r)}
+              className={cn("cursor-pointer rounded-full px-3 py-1 font-medium transition-all", raw === r ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground")}
+            >
+              {r ? "Texte brut" : "Mise en forme"}
+            </button>
+          ))}
+        </div>
+      </div>
+      <div className="cv-paper max-h-[68vh] overflow-auto">
+        {raw ? (
+          <div className="font-mono text-[12.5px] leading-relaxed whitespace-pre-wrap">
+            <Inline text={text} from={0} to={text.length} hl={hl} markRef={markRef} />
+          </div>
+        ) : (
+          lines.map(({ start, end }, i) => {
+            const line = text.slice(start, end);
+            const kind = classify(line, !seenContent);
+            if (kind !== "blank") seenContent = true;
+            if (kind === "blank") return <div key={i} className="h-2" />;
+            if (kind === "name")
+              return (
+                <div key={i} className="cv-name">
+                  <Inline text={text} from={start} to={end} hl={hl} markRef={markRef} />
+                </div>
+              );
+            if (kind === "heading")
+              return (
+                <div key={i} className="cv-heading">
+                  <Inline text={text} from={start} to={end} hl={hl} markRef={markRef} />
+                </div>
+              );
+            if (kind === "bullet") {
+              const pre = line.match(BULLET_RE)![0].length;
+              return (
+                <div key={i} className="cv-bullet">
+                  <span className="cv-dot" aria-hidden />
+                  <span>
+                    <Inline text={text} from={start + pre} to={end} hl={hl} markRef={markRef} />
+                  </span>
+                </div>
+              );
+            }
+            const period = line.match(PERIOD_RE);
+            if (period) {
+              const ps = start + period[1].length, pe = ps + period[2].length;
+              return (
+                <div key={i} className="cv-line">
+                  <span className="cv-period">
+                    <Inline text={text} from={ps} to={pe} hl={hl} markRef={markRef} />
+                  </span>{" "}
+                  <Inline text={text} from={pe} to={end} hl={hl} markRef={markRef} />
+                </div>
+              );
+            }
+            return (
+              <div key={i} className="cv-line">
+                <Inline text={text} from={start} to={end} hl={hl} markRef={markRef} />
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 }
@@ -582,9 +729,15 @@ export function CandidateView({ id, model }: { id: string; model: ModelKey }) {
           <Card className="gap-3 lg:sticky lg:top-20">
             <CardHeader>
               <CardTitle className="flex items-center gap-2 text-sm">
-                <FileText className="text-muted-foreground size-4" /> Texte du CV (version masquée)
+                <span className="logo-badge grid size-7 place-items-center rounded-lg text-white shadow-sm">
+                  <FileText className="size-3.5" />
+                </span>
+                CV — version masquée
               </CardTitle>
-              <CardDescription className="text-xs">Seule version conservée. Les données personnelles non utiles au poste sont remplacées par [… retiré].</CardDescription>
+              <CardDescription className="text-xs">
+                Seule version conservée. Il sert à vérifier chaque citation (cliquez une citation dans l'analyse pour la retrouver ici) et à
+                contrôler le masquage : les données écartées apparaissent comme <span className="cv-redacted"><EyeOff className="size-3" aria-hidden />retiré</span>.
+              </CardDescription>
             </CardHeader>
             <CvText text={cand.redacted_text ?? ""} range={range} />
           </Card>

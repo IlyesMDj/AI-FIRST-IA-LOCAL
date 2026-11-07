@@ -66,12 +66,12 @@ function DropZone({ model, onUploaded }: { model: ModelKey; onUploaded: () => vo
           send(Array.from(e.dataTransfer.files));
         }}
         className={cn(
-          "flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors",
-          over ? "border-primary bg-primary/5" : "hover:border-primary/50 hover:bg-accent/40 bg-card",
+          "drop-zone flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border-2 border-dashed px-6 py-8 text-center transition-colors",
+          over ? "border-primary bg-primary/10" : "border-primary/30 hover:border-primary/60 hover:bg-accent/40 bg-card/80",
           uploading && "pointer-events-none opacity-60",
         )}
       >
-        <span className="bg-primary/10 text-primary grid size-11 place-items-center rounded-full">
+        <span className="drop-icon grid size-12 place-items-center rounded-full text-white shadow-md">
           {uploading ? <Upload className="size-5 animate-bounce" /> : <FileUp className="size-5" />}
         </span>
         <span className="font-medium">{uploading ? "Envoi en cours…" : "Déposez les CV ici ou cliquez pour choisir"}</span>
@@ -90,6 +90,11 @@ function DropZone({ model, onUploaded }: { model: ModelKey; onUploaded: () => vo
       <ErrorNote error={error} />
     </div>
   );
+}
+
+function initials(name: string): string {
+  const parts = name.replace(/\.[a-z0-9]{2,4}$/i, "").split(/[\s_\-.]+/).filter(Boolean);
+  return ((parts[0]?.[0] ?? "?") + (parts[1]?.[0] ?? "")).toUpperCase();
 }
 
 export function CandidatesView({ model }: { model: ModelKey }) {
@@ -115,21 +120,24 @@ export function CandidatesView({ model }: { model: ModelKey }) {
         <p className="text-muted-foreground text-sm">Aucun candidat pour l'instant.</p>
       ) : (
         <Card className="gap-0 overflow-hidden py-0">
-          <div className="text-muted-foreground flex flex-wrap gap-x-4 gap-y-1 border-b px-5 py-2.5 text-xs">
-            <span>{list.length} fichier(s)</span>
-            {counts.ready ? <span>{counts.ready} prêt(s)</span> : null}
-            {(counts.pending ?? 0) + (counts.analyzing ?? 0) > 0 && <span>{(counts.pending ?? 0) + (counts.analyzing ?? 0)} en cours — actualisation automatique</span>}
-            {(counts.unsupported ?? 0) + (counts.error ?? 0) > 0 && <span>{(counts.unsupported ?? 0) + (counts.error ?? 0)} à vérifier</span>}
+          <div className="bg-muted/40 flex flex-wrap gap-2 border-b px-5 py-2.5 text-xs font-medium">
+            <span className="bg-secondary rounded-full px-2.5 py-0.5">{list.length} fichier(s)</span>
+            {counts.ready ? <span className="bg-ok-bg text-ok-fg rounded-full px-2.5 py-0.5">{counts.ready} prêt(s)</span> : null}
+            {(counts.pending ?? 0) + (counts.analyzing ?? 0) > 0 && <span className="bg-accent text-primary status-analyzing rounded-full px-2.5 py-0.5">{(counts.pending ?? 0) + (counts.analyzing ?? 0)} en cours — actualisation automatique</span>}
+            {(counts.unsupported ?? 0) + (counts.error ?? 0) > 0 && <span className="bg-partial-bg text-partial-fg rounded-full px-2.5 py-0.5">{(counts.unsupported ?? 0) + (counts.error ?? 0)} à vérifier</span>}
           </div>
           <ul className="divide-y">
             {list.map((c, i) => (
-              <li key={c.id}>
+              <li key={c.id} className="row-anim" style={{ animationDelay: `${Math.min(i, 12) * 40}ms` }}>
                 <button
                   onClick={() => navigate(`/candidats/${encodeURIComponent(c.id)}`)}
-                  className="hover:bg-accent/50 group flex w-full cursor-pointer items-center gap-4 px-5 py-3 text-left"
+                  className="hover:bg-accent/60 group flex w-full cursor-pointer items-center gap-4 px-5 py-3 text-left transition-colors"
                 >
-                  <span className="text-muted-foreground w-6 shrink-0 text-right font-mono text-xs" title="Ordre d'import">
+                  <span className="text-muted-foreground w-5 shrink-0 text-right font-mono text-xs" title="Ordre d'import">
                     {i + 1}
+                  </span>
+                  <span aria-hidden className={`avatar-${i % 6} grid size-9 shrink-0 place-items-center rounded-full text-xs font-bold text-white shadow-sm transition-transform group-hover:scale-110`}>
+                    {initials(c.display_name)}
                   </span>
                   <div className="min-w-0 flex-1">
                     <div className="truncate font-medium">{c.display_name}</div>
@@ -140,7 +148,7 @@ export function CandidatesView({ model }: { model: ModelKey }) {
                     )}
                   </div>
                   <StatusBadge status={c.status} />
-                  <ChevronRight className="text-muted-foreground size-4 opacity-0 transition-opacity group-hover:opacity-100" aria-hidden />
+                  <ChevronRight className="text-primary size-4 -translate-x-1 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" aria-hidden />
                 </button>
               </li>
             ))}

@@ -45,10 +45,10 @@ export default function App() {
         <header className="bg-card/80 sticky top-0 z-30 border-b backdrop-blur">
           <div className="mx-auto flex max-w-7xl items-center gap-6 px-4 sm:px-6">
             <button onClick={() => navigate("/candidats")} className="flex cursor-pointer items-center gap-2 py-3">
-              <span className="bg-primary text-primary-foreground grid size-7 place-items-center rounded-md text-xs font-bold">RC</span>
+              <span className="logo-badge grid size-8 place-items-center rounded-lg text-xs font-bold text-white shadow-sm">RC</span>
               <span className="hidden font-semibold tracking-tight sm:inline">Recruiter Copilot</span>
             </button>
-            <nav className="-mb-px flex gap-1 overflow-x-auto" aria-label="Navigation principale">
+            <nav className="flex gap-1 overflow-x-auto" aria-label="Navigation principale">
               {NAV.map((n) => {
                 const active = section === n.path;
                 const Icon = n.icon;
@@ -58,8 +58,10 @@ export default function App() {
                     href={`#${n.path}`}
                     aria-current={active ? "page" : undefined}
                     className={cn(
-                      "inline-flex items-center gap-1.5 border-b-2 px-3 py-3.5 text-sm font-medium whitespace-nowrap transition-colors",
-                      active ? "border-primary text-foreground" : "text-muted-foreground hover:text-foreground border-transparent",
+                      "my-2 inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-sm font-medium whitespace-nowrap transition-all duration-200",
+                      active
+                        ? "bg-primary text-primary-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground hover:bg-accent",
                     )}
                   >
                     <Icon className="size-4" aria-hidden />
@@ -70,7 +72,7 @@ export default function App() {
             </nav>
           </div>
         </header>
-        <main className="mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6">{view}</main>
+        <main key={route} className="view-anim mx-auto w-full max-w-7xl flex-1 px-4 py-6 sm:px-6">{view}</main>
         <footer className="text-muted-foreground border-t py-4 text-center text-xs">
           Recruiter Copilot · Atelier Nova · aucune donnée ne quitte cet ordinateur
         </footer>

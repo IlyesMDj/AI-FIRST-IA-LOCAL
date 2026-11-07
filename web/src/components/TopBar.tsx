@@ -58,7 +58,7 @@ function HealthIndicator({ model }: { model: ModelKey }) {
   return (
     <Tooltip>
       <TooltipTrigger asChild>
-        <span className="inline-flex cursor-default items-center gap-2 rounded-md border bg-card px-2.5 py-1 text-xs font-medium">
+        <span className="inline-flex cursor-default items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-medium text-white">
           <span className="relative flex size-2">
             {tone === "ok" && <span className={cn("absolute inline-flex size-full animate-ping rounded-full opacity-50", dot)} />}
             <span className={cn("relative inline-flex size-2 rounded-full", dot)} />
@@ -77,8 +77,8 @@ function ModelSelector({ value, onChange }: { value: ModelKey; onChange: (m: Mod
     { key: "precis", label: "Précis (8b)" },
   ];
   return (
-    <div role="radiogroup" aria-label="Modèle d'IA local" className="bg-muted inline-flex items-center rounded-md p-0.5">
-      <Cpu className="text-muted-foreground mx-1.5 size-3.5" aria-hidden />
+    <div role="radiogroup" aria-label="Modèle d'IA local" className="inline-flex items-center rounded-full bg-white/10 p-0.5">
+      <Cpu className="mx-1.5 size-3.5 text-white/70" aria-hidden />
       {opts.map((o) => (
         <button
           key={o.key}
@@ -86,8 +86,8 @@ function ModelSelector({ value, onChange }: { value: ModelKey; onChange: (m: Mod
           aria-checked={value === o.key}
           onClick={() => onChange(o.key)}
           className={cn(
-            "cursor-pointer rounded px-2.5 py-1 text-xs font-medium transition-colors",
-            value === o.key ? "bg-card text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground",
+            "cursor-pointer rounded-full px-3 py-1 text-xs font-medium transition-all duration-200",
+            value === o.key ? "bg-white text-[var(--brand-navy)] shadow-sm" : "text-white/70 hover:text-white",
           )}
         >
           {o.label}
@@ -109,19 +109,19 @@ export function TopBar({
   onToggleDark: () => void;
 }) {
   return (
-    <div className="border-b bg-primary/[0.06] dark:bg-primary/[0.08]">
+    <div className="brand-gradient text-white">
       <div className="mx-auto flex max-w-7xl flex-col gap-2 px-4 py-2 md:flex-row md:items-center md:justify-between sm:px-6">
         <p className="flex items-start gap-2 text-sm">
-          <HardDrive className="text-primary mt-0.5 size-4 shrink-0" aria-hidden />
+          <HardDrive className="mt-0.5 size-4 shrink-0 text-[var(--brand-amber)]" aria-hidden />
           <span>
             <strong className="font-semibold">Traitement 100 % local</strong>
-            <span className="text-muted-foreground"> · </span>
-            Aide à la lecture — l'outil ne classe pas et ne recommande pas : <strong className="font-semibold">vous décidez.</strong>
+            <span className="text-white/50"> · </span>
+            Aide à la lecture — l'outil ne classe pas et ne recommande pas : <strong className="font-semibold text-[var(--brand-amber)]">vous décidez.</strong>
           </span>
         </p>
         <div className="flex flex-wrap items-center gap-2">
           {MOCK && (
-            <span className="rounded-md border border-dashed border-amber-500/60 px-2 py-1 text-xs font-medium text-amber-700 dark:text-amber-400">
+            <span className="rounded-md border border-dashed border-amber-300/70 px-2 py-1 text-xs font-medium text-amber-200">
               Mode démo (données fictives)
             </span>
           )}
@@ -129,7 +129,7 @@ export function TopBar({
           <ModelSelector value={model} onChange={onModelChange} />
           <button
             onClick={onToggleDark}
-            className="hover:bg-accent text-muted-foreground inline-flex size-7 cursor-pointer items-center justify-center rounded-md"
+            className="inline-flex size-7 cursor-pointer items-center justify-center rounded-full text-white/80 transition-colors hover:bg-white/10 hover:text-white"
             aria-label={dark ? "Passer en thème clair" : "Passer en thème sombre"}
             title={dark ? "Thème clair" : "Thème sombre"}
           >

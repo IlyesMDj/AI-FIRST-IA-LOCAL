@@ -72,7 +72,7 @@ export function AssessmentLegend() {
 
 const STATUS: Record<Status, { label: string; icon: typeof Clock; cls: string; spin?: boolean }> = {
   pending: { label: "En attente", icon: Clock, cls: "text-muted-foreground bg-muted border-border" },
-  analyzing: { label: "Analyse…", icon: Loader2, cls: "text-primary bg-accent border-border", spin: true },
+  analyzing: { label: "Analyse…", icon: Loader2, cls: "text-primary bg-accent border-primary/30 status-analyzing", spin: true },
   ready: { label: "Prêt", icon: CheckCircle2, cls: "bg-ok-bg text-ok-fg border-ok-border" },
   unsupported: { label: "Illisible", icon: FileWarning, cls: "bg-partial-bg text-partial-fg border-partial-border" },
   error: { label: "Erreur", icon: AlertTriangle, cls: "text-destructive bg-destructive/10 border-destructive/30" },
@@ -117,7 +117,7 @@ export function PageHeader({ title, description, children }: { title: string; de
   return (
     <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
       <div className="min-w-0">
-        <h1 className="text-2xl font-semibold tracking-tight">{title}</h1>
+        <h1 className="title-gradient text-3xl font-bold tracking-tight">{title}</h1>
         {description && <p className="text-muted-foreground mt-1 text-sm">{description}</p>}
       </div>
       {children && <div className="flex flex-wrap items-center gap-2">{children}</div>}
@@ -136,4 +136,6 @@ export const REMOVED_LABELS: Record<string, string> = {
   lien_perso: "Lien vers un profil personnel",
   numero_secu: "Numéro de sécurité sociale",
   photo: "Photo (mention)",
+  sante: "Santé / handicap",
+  religion: "Religion",
 };
